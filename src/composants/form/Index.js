@@ -1,0 +1,97 @@
+import { useState, useRef, useEffect } from "react";
+import { BiSolidCalendar } from "react-icons/bi";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { useDispatch } from "react-redux";
+import { v4 as uuidv4 } from 'uuid';
+import { fetchDatas } from "../../redux/reducers/rootReducer";
+import FormEdit from "../formEdit/Index";
+
+const Form = () => {
+  const [startDate, setStartDate] = useState("");
+  const [tache, setTache] = useState("");
+  const datePickerRef = useRef(new Date());
+  const dispatch = useDispatch();
+  const [error, setError] = useState();
+
+
+  const handleLogoClick = () => {
+    datePickerRef.current.setOpen(true);
+  };
+
+  const handleDateChange = (date) => {
+    setStartDate(date);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (tache === "" || startDate === "") {
+      setError("Veuillez entrer une tache");
+      setTache("");
+    } else {
+      dispatch(
+        fetchDatas({ id: uuidv4(),  tache, date: startDate ? startDate.toString() : "" })
+      );
+      setTache("");
+      setStartDate("");
+      setError("");
+    }
+  };
+
+  return (
+    <>
+      <div className="pb-2">
+        <div className="card">
+          <div
+            className="card-body"
+            style={{ boxShadow: "4px 2px 4px rgba(0, 0, 0, 0.1)" }}
+          >
+            <form onSubmit={handleSubmit}>
+              <div className="d-flex flex-row align-items-center">
+                <input
+                  type="text"
+                  className="form-control form-control-lg"
+                  id="exampleFormControlInput1"
+                  placeholder="Add new..."
+                  value={tache}
+                  onChange={(e) => setTache(e.target.value)}
+                />
+                <a
+                  href="#"
+                  data-mdb-toggle="tooltip"
+                  title="Set due date"
+                  onClick={handleLogoClick}
+                >
+                  <BiSolidCalendar size={28} className="me-3" />
+                </a>
+
+                <DatePicker
+                  ref={datePickerRef}
+                  selected={startDate}
+                  onChange={handleDateChange}
+                  className="d-none"
+                />
+
+                <div>
+                  <button
+                    className="btn btn-primary"
+                    style={{ boxShadow: "4px 2px 4px rgba(0, 0, 0, 0.1)" }}
+                  >
+                    Add
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        {error && (
+          <div style={{ color: "red" }}>Entrer une tache et une date</div>
+        )}
+      </div>
+      <FormEdit />
+      <hr className="my-4" />
+    </>
+  );
+};
+
+export default Form;
