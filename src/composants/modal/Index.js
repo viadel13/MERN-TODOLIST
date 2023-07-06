@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 
 const Modal = ({ setConfirmDelete, tacheSupp, msg, setMsg }) => {
-  const[delVald, setDelVald] = useState(false);
-  const[load, setLoad] = useState(false);
+  const [delVald, setDelVald] = useState(false);
+  const [load, setLoad] = useState(false);
 
   const handleConfirmDelete = () => {
     setMsg(false);
@@ -10,8 +10,8 @@ const Modal = ({ setConfirmDelete, tacheSupp, msg, setMsg }) => {
     setDelVald(true);
   };
 
-  useEffect(()=>{
-    if(delVald){
+  useEffect(() => {
+    if (delVald) {
       const timeOut = setTimeout(() => {
         setMsg(false);
         setLoad(false);
@@ -24,55 +24,62 @@ const Modal = ({ setConfirmDelete, tacheSupp, msg, setMsg }) => {
   }, [delVald]);
 
   return (
-    <>
-        <div
-          className="modal fade"
-          id="exampleModal"
-          tabIndex="-1"
-          aria-labelledby="exampleModalLabel"
-          aria-hidden="true"
-        >
-          <div className="modal-dialog">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title">Supprimer la Tache</h5>
-                <button
-                  type="button"
-                  className="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                ></button>
-              </div>
-              <div className="modal-body d-flex justify-content-center">
-                {msg && <p> Voulez vous vraiment supprimer la tache <i className="fw-bold"> "{tacheSupp}" </i></p>}
+    <> 
+    
+      <div
+        className="modal fade"
+        id="exampleModal"
+        tabIndex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title">Supprimer la Tache</h5>
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div className="modal-body d-flex justify-content-center">
+              {msg && (
+                <p>
+                  {" "}
+                  Voulez vous vraiment supprimer la tache{" "}
+                  <i className="fw-bold"> "{tacheSupp}" </i>
+                </p>
+              )}
 
-                {load ?(
+              {load ? (
                 <div className="spinner-border text-success " role="status">
                   <span className="visually-hidden ">Loading...</span>
                 </div>
-                ): !msg && <strong>Supprimer &#128077;</strong> }
-            
-              </div>
-              <div className="modal-footer">
-                <button
-                  type="button"
-                  className="btn btn-secondary"
-                  data-bs-dismiss="modal"
-                >
-                  Non
-                </button>
-                <button
-                  type="button"
-                  className="btn btn-danger"
-                  onClick={handleConfirmDelete}
-                >
-                  Oui
-                </button>
-              </div>
+              ) : (
+                !msg && <strong>Supprimer &#128077;</strong>
+              )}
+            </div>
+            <div className="modal-footer">
+              <button
+                type="button"
+                className="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Non
+              </button>
+              <button
+                type="button"
+                className="btn btn-danger"
+                onClick={handleConfirmDelete}
+              >
+                Oui
+              </button>
             </div>
           </div>
         </div>
-      
+      </div>
     </>
   );
 };
