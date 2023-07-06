@@ -25,7 +25,6 @@ const Modal = ({ setConfirmDelete, tacheSupp, msg, setMsg }) => {
 
   return (
     <>
-
         <div
           className="modal fade"
           id="exampleModal"
