@@ -31,7 +31,7 @@ console.log(load)
         <div
           className="modal fade"
           id="exampleModal"
-          tabiIdex="-1"
+          tabIndex="-1"
           aria-labelledby="exampleModalLabel"
           aria-hidden="true"
         >
