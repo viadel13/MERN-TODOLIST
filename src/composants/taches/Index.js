@@ -14,6 +14,7 @@ const Taches = () => {
   const[confirmDelete, setConfirmDelete] = useState(false)
   const[id, setId] = useState('');
   const[tacheSupp, setTacheSupp] = useState('');
+  const[msg, setMsg] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -28,6 +29,7 @@ const Taches = () => {
   const infoModal = (idModal, tacheModal) =>{
     setId(idModal)
     setTacheSupp(tacheModal)
+    setMsg(true)
   }
 
   const editer = (nameTache, id)=>{
@@ -156,7 +158,7 @@ const Taches = () => {
   return (
     <>
       {listeTaches}
-      <Modal setConfirmDelete={setConfirmDelete} tacheSupp={tacheSupp} />
+      <Modal setConfirmDelete={setConfirmDelete} tacheSupp={tacheSupp} msg={msg} setMsg={setMsg}  />
     </>
   );
 };

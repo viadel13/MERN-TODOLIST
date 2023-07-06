@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 
-const Modal = ({ setConfirmDelete, tacheSupp }) => {
+const Modal = ({ setConfirmDelete, tacheSupp, msg, setMsg }) => {
   const[delVald, setDelVald] = useState(false);
   const[load, setLoad] = useState(false);
-  const[msg, setMsg] = useState(true);
+
 
 console.log(load)
   const handleConfirmDelete = () => {
@@ -16,6 +16,7 @@ console.log(load)
   useEffect(()=>{
     if(delVald){
       const timeOut = setTimeout(() => {
+        setMsg(false)
         setLoad(false)
         setDelVald(false)
         setConfirmDelete(true);
