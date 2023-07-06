@@ -5,7 +5,7 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import axios from "axios";
 import { showList } from "../../redux/reducers/rootReducer";
 import { deleteData, tacheRenom } from "../../redux/reducers/rootReducer";
-// import Modal from "../modal/Index";
+import Modal from "../modal/Index";
 
 const Taches = () => {
   const tache = useSelector((state) => state.taches.taches);
@@ -158,7 +158,7 @@ const Taches = () => {
   return (
     <>
       {listeTaches}
-      {/* <Modal setConfirmDelete={setConfirmDelete} tacheSupp={tacheSupp} msg={msg} setMsg={setMsg}  /> */}
+      <Modal setConfirmDelete={setConfirmDelete} tacheSupp={tacheSupp} msg={msg} setMsg={setMsg}  />
     </>
   );
 };
