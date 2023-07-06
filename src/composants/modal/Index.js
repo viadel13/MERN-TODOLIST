@@ -5,11 +5,10 @@ const Modal = ({ setConfirmDelete, tacheSupp, msg, setMsg }) => {
   const[load, setLoad] = useState(false);
 
 
-console.log(load)
   const handleConfirmDelete = () => {
-    setMsg(false)
-    setLoad(true)
-    setDelVald(true)
+    setMsg(false);
+    setLoad(true);
+    setDelVald(true);
   };
 
   useEffect(()=>{
