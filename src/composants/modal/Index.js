@@ -49,8 +49,8 @@ console.log(load)
               <div className="modal-body d-flex justify-content-center">
                 {msg && (
                     <p>
-                      Voulez vous vraiment supprimer la tache{" "}
-                      <i className="fw-bold"> "{tacheSupp}" </i>{" "}
+                      Voulez vous vraiment supprimer la tache
+                      <i className="fw-bold"> "{tacheSupp}" </i>
                     </p>
                 )}
 

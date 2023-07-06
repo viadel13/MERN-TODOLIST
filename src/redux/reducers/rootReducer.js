@@ -84,8 +84,8 @@ const todoSlice = createSlice({
   export const deleteData = (id) => async (dispatch)=>{
     try {
       dispatch(drop(id))
-      const response = await axios.get(`/drop/${id}`)
-      // const response = await axios.get(`https://api-todolist-a3aa7e82be36.herokuapp.com/drop/${id}`)
+      // const response = await axios.get(`/drop/${id}`)
+      const response = await axios.get(`https://api-todolist-a3aa7e82be36.herokuapp.com/drop/${id}`)
     } catch (error) {
       
     }

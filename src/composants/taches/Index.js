@@ -128,7 +128,7 @@ const Taches = () => {
                 title="Delete todo"
                 data-bs-toggle="modal"
                 data-bs-target="#exampleModal"
-                onClick={()=>infoModal(i.id)}
+                onClick={()=>infoModal(i.id, i.tache)}
               >
 
                 <RiDeleteBin6Line />
