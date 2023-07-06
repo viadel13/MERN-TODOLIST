@@ -47,9 +47,7 @@ console.log(load)
                 ></button>
               </div>
               <div className="modal-body d-flex justify-content-center">
-                {msg && (
-                    <p>   Voulez vous vraiment supprimer la tache <i className="fw-bold"> "{tacheSupp}" </i></p>
-                )}
+                {msg && <p> Voulez vous vraiment supprimer la tache <i className="fw-bold"> "{tacheSupp}" </i></p>}
 
                 {load ?(
                 <div className="spinner-border text-success " role="status">
