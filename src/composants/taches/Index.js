@@ -20,7 +20,7 @@ const Taches = () => {
 
   useEffect(() => {
     tacheShow();
-  }, []);
+  }, [])
 
   const handleMouseOver = (id) => {
     setMouseId(id);
