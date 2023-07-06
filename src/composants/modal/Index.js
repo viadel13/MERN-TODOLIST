@@ -4,7 +4,6 @@ const Modal = ({ setConfirmDelete, tacheSupp, msg, setMsg }) => {
   const[delVald, setDelVald] = useState(false);
   const[load, setLoad] = useState(false);
 
-
   const handleConfirmDelete = () => {
     setMsg(false);
     setLoad(true);
