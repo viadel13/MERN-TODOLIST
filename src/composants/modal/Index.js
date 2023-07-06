@@ -13,15 +13,15 @@ const Modal = ({ setConfirmDelete, tacheSupp, msg, setMsg }) => {
   useEffect(()=>{
     if(delVald){
       const timeOut = setTimeout(() => {
-        setMsg(false)
-        setLoad(false)
-        setDelVald(false)
+        setMsg(false);
+        setLoad(false);
+        setDelVald(false);
         setConfirmDelete(true);
         location.reload();
       }, 2000);
       return () => clearTimeout(timeOut);
     }
-  }, [delVald])
+  }, [delVald]);
 
   return (
     <>
