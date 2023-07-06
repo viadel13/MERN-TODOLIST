@@ -10,7 +10,6 @@ console.log(load)
     setMsg(false)
     setLoad(true)
     setDelVald(true)
-  
   };
 
   useEffect(()=>{
