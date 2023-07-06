@@ -158,7 +158,7 @@ const Taches = () => {
   return (
     <>
       {listeTaches}
-      <Modal setConfirmDelete={setConfirmDelete} tacheSupp={tacheSupp} msg={msg} setMsg={setMsg}  />
+      {/* <Modal setConfirmDelete={setConfirmDelete} tacheSupp={tacheSupp} msg={msg} setMsg={setMsg}  /> */}
     </>
   );
 };
