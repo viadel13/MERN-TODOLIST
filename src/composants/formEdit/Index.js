@@ -6,37 +6,45 @@ import "react-datepicker/dist/react-datepicker.css";
 import { RenameDatas } from "../../redux/reducers/rootReducer";
 
 const FormEdit = () => {
-  const [startDate, setStartDate] = useState("");
-  const [tache, setTache] = useState("");
-  const datePickerRef = useRef(new Date());
+  const [startDateEdit, setStartDateEdit] = useState("");
+  const [tacheEdit, setTacheEdit] = useState("");
+  const datePickerRefEdit = useRef(new Date());
   const dispatch = useDispatch();
-  const [error, setError] = useState();
+  const [errorEdit, setErrorEdit] = useState('');
+  const [buttonAc, setButtonAc] = useState(false);
   const tacheRename = useSelector((state) => state.taches.tacheRename);
+
   const idReducer = useSelector((state) => state.taches.idRename);
   
   const handleLogoClick = () => {
-    datePickerRef.current.setOpen(true);
+    datePickerRefEdit.current.setOpen(true);
   };
 
   useEffect(()=>{
-    setTache(tacheRename)
+    setTacheEdit(tacheRename)
   }, [tacheRename])
 
   const handleDateChange = (date) => {
-    setStartDate(date);
+    setStartDateEdit(date);
   };
+
+  useEffect(()=>{
+
+    if(tacheEdit === "" ||  startDateEdit === ""){
+      setButtonAc(false)
+    }
+    else{
+      setButtonAc(true)
+    }
+
+  }, [tacheEdit, startDateEdit, buttonAc])
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (tache === "" || startDate === "") {
-      setError("Veuillez entrer une tache");
-      setTache("");
-    } else {
-      dispatch(RenameDatas(tache, idReducer))
-      setTache("");
-      setStartDate("");
-      setError("");
-    }
+    dispatch(RenameDatas(tacheEdit, idReducer, startDateEdit.toString() ))
+    setTacheEdit("");
+    setStartDateEdit("");
+    setErrorEdit("");
   };
 
   return (
@@ -54,8 +62,8 @@ const FormEdit = () => {
                     type="text"
                     className="form-control form-control-lg"
                     id="exampleFormControlInput1"
-                    value={tache}
-                    onChange={(e) => setTache(e.target.value)}
+                    value={tacheEdit}
+                    onChange={(e) => setTacheEdit(e.target.value)}
                   />
                   <a
                     href="#"
@@ -67,16 +75,17 @@ const FormEdit = () => {
                   </a>
 
                   <DatePicker
-                    ref={datePickerRef}
-                    selected={startDate}
+                    ref={datePickerRefEdit}
+                    selected={startDateEdit}
                     onChange={handleDateChange}
                     className="d-none"
                   />
 
                   <div>
                     <button
-                      className="btn btn-primary"
+                      className= {` ${buttonAc ? 'btn btn-primary' : 'btn btn-secondary disabled' }`}
                       style={{ boxShadow: "4px 2px 4px rgba(0, 0, 0, 0.1)" }}
+
                     >
                       Modifier
                     </button>
@@ -85,7 +94,7 @@ const FormEdit = () => {
               </form>
             </div>
           </div>
-          {error && (
+          {errorEdit && (
             <div style={{ color: "red" }}>Entrer une tache et une date</div>
           )}
         </div>

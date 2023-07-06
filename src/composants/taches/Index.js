@@ -44,6 +44,7 @@ const Taches = () => {
   const tacheShow = async () => {
     try {
       const response = await axios.get("https://api-todolist-a3aa7e82be36.herokuapp.com/showTaches");
+      // const response = await axios.get("/showTaches");
       console.log(response.status);
       dispatch(showList(response.data));
     } catch (error) {
@@ -116,7 +117,7 @@ const Taches = () => {
                 className="text-info"
                 data-mdb-toggle="tooltip"
                 title="Edit todo"
-                onClick={()=>editer(i.tache, i.id)}
+                onClick={()=>editer(i.tache, i.id, i.date)}
               >
                 <GoPencil className="me-3" />
               </a>
@@ -127,7 +128,7 @@ const Taches = () => {
                 title="Delete todo"
                 data-bs-toggle="modal"
                 data-bs-target="#exampleModal"
-                onClick={()=>infoModal(i.id, i.tache)}
+                onClick={()=>infoModal(i.id)}
               >
 
                 <RiDeleteBin6Line />

@@ -6,7 +6,8 @@ import axios from 'axios';
 const initialState = {
   taches: [],
   tacheRename: '',
-  idRename: ''
+  idRename: '',
+
 }
 
 
@@ -20,6 +21,7 @@ const todoSlice = createSlice({
       },
 
       ajouter: (state, action) =>{
+
         state.taches = [...state.taches, { id: action.payload.id, tache: action.payload.tache,  date: action.payload.date}];    
       },
 
@@ -28,13 +30,16 @@ const todoSlice = createSlice({
 
         state.tacheRename = action.payload.nameTache
         state.idRename = action.payload.id
+      
       },
 
       rename: (state, action)=>{
        const id = state.idRename;
        const findRename =  state.taches.findIndex((i)=> i.id === id);
        if(findRename !== -1){
-        state.taches[findRename].tache = action.payload;
+        state.taches[findRename].tache = action.payload.tache;
+        state.taches[findRename].date = action.payload.dateRenam;
+        state.tacheRename = ''
        }
       },
 
@@ -57,17 +62,19 @@ const todoSlice = createSlice({
   export const fetchDatas = (datas) => async (dispatch) =>{
     try {
       dispatch(ajouter(datas))
+      // const response = await axios.post('/addTaches', {datas});
       const response = await axios.post('https://api-todolist-a3aa7e82be36.herokuapp.com/addTaches', {datas});
       
     } catch (error) {
         
     }
   }
-  export const RenameDatas = (tache, idReducer) => async (dispatch) =>{
+  export const RenameDatas = (tache, idReducer, dateRenam) => async (dispatch) =>{
     try {
-      dispatch(rename(tache))
+      dispatch(rename({tache, dateRenam}))
       
-      const response = await axios.get(`https://api-todolist-a3aa7e82be36.herokuapp.com/rename/${tache}/${idReducer}`);
+      // const response = await axios.get(`/rename/${tache}/${idReducer}/${dateRenam}`);
+      const response = await axios.get(`https://api-todolist-a3aa7e82be36.herokuapp.com/rename/${tache}/${idReducer}/${dateRenam}`);
  
     } catch (error) {
         
@@ -77,7 +84,8 @@ const todoSlice = createSlice({
   export const deleteData = (id) => async (dispatch)=>{
     try {
       dispatch(drop(id))
-      const response = await axios.get(`https://api-todolist-a3aa7e82be36.herokuapp.com/drop/${id}`)
+      const response = await axios.get(`/drop/${id}`)
+      // const response = await axios.get(`https://api-todolist-a3aa7e82be36.herokuapp.com/drop/${id}`)
     } catch (error) {
       
     }

@@ -1,9 +1,29 @@
-const Modal = ({ setConfirmDelete, tacheSupp }) => {
+import { useEffect, useState } from "react";
 
+const Modal = ({ setConfirmDelete, tacheSupp }) => {
+  const[delVald, setDelVald] = useState(false);
+  const[load, setLoad] = useState(false);
+  const[msg, setMsg] = useState(true);
+
+console.log(load)
   const handleConfirmDelete = () => {
-    setConfirmDelete(true);
+    setMsg(false)
+    setLoad(true)
+    setDelVald(true)
   
   };
+
+  useEffect(()=>{
+    if(delVald){
+      const timeOut = setTimeout(() => {
+        setLoad(false)
+        setDelVald(false)
+        setConfirmDelete(true);
+        location.reload();
+      }, 2000);
+      return () => clearTimeout(timeOut);
+    }
+  }, [delVald])
 
   return (
     <>
@@ -26,11 +46,20 @@ const Modal = ({ setConfirmDelete, tacheSupp }) => {
                   aria-label="Close"
                 ></button>
               </div>
-              <div className="modal-body">
-                <p>
-                  Voulez vous vraiment supprimer la tache{" "}
-                  <i className="fw-bold"> "{tacheSupp}" </i>{" "}
-                </p>
+              <div className="modal-body d-flex justify-content-center">
+                {msg && (
+                    <p>
+                      Voulez vous vraiment supprimer la tache{" "}
+                      <i className="fw-bold"> "{tacheSupp}" </i>{" "}
+                    </p>
+                )}
+
+                {load ?(
+                <div className="spinner-border text-success " role="status">
+                  <span className="visually-hidden ">Loading...</span>
+                </div>
+                ): !msg && <strong>Supprimer &#128077;</strong> }
+            
               </div>
               <div className="modal-footer">
                 <button
