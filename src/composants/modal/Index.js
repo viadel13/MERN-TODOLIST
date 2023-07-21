@@ -17,7 +17,7 @@ const Modal = ({ setConfirmDelete, tacheSupp, msg, setMsg }) => {
         setLoad(false);
         setDelVald(false);
         setConfirmDelete(true);
-        location.reload();
+        window.location.reload();
       }, 2000);
       return () => clearTimeout(timeOut);
     }
